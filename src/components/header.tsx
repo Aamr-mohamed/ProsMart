@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = () => {
     <header className="bg-blue-gray-900 p-4 text-white flex justify-between items-center">
       {/* Logo on the left */}
       <div className="flex items-center">
-        <span className="text-xl font-bold">Pros Shop</span>
+        <span className="text-xl font-bold">Pros Mart</span>
       </div>
 
       {/* Search input in the middle */}

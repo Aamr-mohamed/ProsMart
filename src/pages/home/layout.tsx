@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/header";
-import Aside from "../../components/aside";
+// import Aside from "../../components/aside";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,11 +8,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen font-lato">
       <div className="">
         <Header />
         <div className="flex ">
-          <Aside />
+          {/* <Aside /> */}
           <div>{children}</div>
         </div>
       </div>

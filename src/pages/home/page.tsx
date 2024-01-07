@@ -6,6 +6,7 @@ import Layout from "./layout";
 import HeroImage from "../../components/ui/heroImage";
 import Testemonies from "../../components/ui/testemonies";
 import Categories from "../../components/ui/categories";
+import AnoTestimony from "../../components/ui/advisor";
 
 export default function Home() {
   return (
@@ -18,6 +19,9 @@ export default function Home() {
 
       {/* category */}
       <Categories />
+
+      {/* another Testimony */}
+      <AnoTestimony />
     </Layout>
   );
 }

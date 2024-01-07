@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 7</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="64" height="64"></rect>
+    </defs>
+    <g id="⚙️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask"></g>
+            <g id="Warranty" mask="url(#mask-2)" fill-rule="nonzero" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
+                <g transform="translate(12.000000, 6.000000)" id="Path">
+                    <path d="M19.9743932,0 L19.9743932,0 C15.6500498,6.60560717 7.74095229,9.91458431 0.00105930373,8.35636489 L0.00105930373,28.8418355 C-0.0675327016,34.9878114 3.19931856,40.6884669 8.53667206,43.7364798 L19.9743932,50.3515797 L19.9743932,50.3515797 L31.4633279,43.7706222 C36.8006814,40.7226093 40.0675327,35.0219539 39.9989407,28.875978 L39.9989407,8.39050734 C32.2375057,9.93985002 24.3130313,6.61940743 19.9743932,0 Z"></path>
+                    <polyline points="13.2824728 25.8031574 18.2501994 30.7794196 26.657778 22.371841"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

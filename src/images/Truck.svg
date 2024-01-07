@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 5</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="64" height="64"></rect>
+    </defs>
+    <g id="⚙️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask"></g>
+            <g id="Group-2" mask="url(#mask-2)" stroke="#000000">
+                <g transform="translate(7.774988, 12.000000)">
+                    <path d="M4.93903343,35.875 L0.000346790695,35.875 L0.000346790695,2.01105871 C-0.00400028364,1.47945334 0.183140665,0.967870355 0.520358743,0.590165573 C0.857576821,0.212460791 1.31689012,0 1.79607574,0 L31.0050124,0 C31.9966344,0 32.8005029,0.891847232 32.8005029,1.99199655 L32.8005029,35.875 L14.5220001,35.875" id="Path" stroke-linecap="round" stroke-linejoin="round" fill-rule="nonzero"></path>
+                    <path d="M35.7797363,35.875 L32.8005029,35.875 L32.8005029,10.2500264 L40.8408838,10.2500264 C41.641075,10.2470717 42.3650549,10.7374849 42.677731,11.4945093 L45.7502753,18.8313105 C45.9302016,19.2568424 46.2186824,19.6244876 46.5852058,19.8953612 L49.3905724,22.0320436 C49.9101164,22.4154965 50.2203285,23.030824 50.2255029,23.6881871 L50.1837564,35.875 L45.227399,35.875" id="Path" stroke-linecap="round" stroke-linejoin="round" fill-rule="nonzero"></path>
+                    <polygon id="Path" stroke-linecap="round" stroke-linejoin="round" fill-rule="nonzero" points="43.0505029 18.45 35.8755029 18.45 35.8755029 12.3 40.4737997 12.3"></polygon>
+                    <circle id="Oval" cx="9.7380029" cy="35.875" r="4.625"></circle>
+                    <circle id="Oval-Copy" cx="40.4880029" cy="35.875" r="4.625"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -11,25 +11,7 @@ import {
   setIsCartOpen,
 } from "../../state/state";
 import { useNavigate } from "react-router-dom";
-import { RootState, itemProps } from "../../state/state";
-
-const constructImageUrl = (item: itemProps) => {
-  const defaultImageUrl = "default-url-for-null-case";
-  const imageAttributes = item?.attributes?.image;
-
-  if (imageAttributes === "media") {
-    // Handle the case when 'image' is a string
-    return defaultImageUrl;
-  }
-
-  const mediumFormat = (
-    imageAttributes as {
-      data: { attributes: { formats: { medium: { url: string } } } };
-    }
-  )?.data?.attributes?.formats?.medium;
-
-  return `http://localhost:1337${mediumFormat?.url || defaultImageUrl}`;
-};
+import { RootState } from "../../state/state";
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -92,7 +74,7 @@ const CartMenu = () => {
                       alt={item?.name}
                       width="123px"
                       height="164px"
-                      src={constructImageUrl(item)}
+                      src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
                     />
                   </Box>
 

@@ -6,9 +6,7 @@ export interface AttributesProps {
   longDescription: string;
   price: number;
   category: string;
-  image:
-    | "media"
-    | { data: { attributes: { formats: { medium: { url: string } } } } };
+  image: { data: { attributes: { formats: { medium: { url: string } } } } };
 }
 
 interface cartProps {

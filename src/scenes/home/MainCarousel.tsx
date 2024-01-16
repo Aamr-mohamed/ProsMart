@@ -5,6 +5,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // Importing types for require.context
+// from stackoverflow and chatgpt
 declare const require: {
   context(
     path: string,
@@ -76,13 +77,35 @@ function MainCarousel() {
             src={texture}
             alt={`carousel-${index}`}
             style={{
-              height: "600px",
+              height: "700px",
               width: "100%",
               objectFit: "cover",
               backgroundAttachment: "fixed",
             }}
           />
-          <Box color="white" padding="20px"></Box>
+          <Box
+            color="white"
+            padding="20px"
+            borderRadius="1px"
+            textAlign="left"
+            bgcolor="rgb(0,0,0,0.4)"
+            position="absolute"
+            top="46%"
+            left={isNonMobile ? "10%" : "0"}
+            right={isNonMobile ? undefined : "0"}
+            margin={isNonMobile ? undefined : "0 auto"}
+            maxWidth={isNonMobile ? undefined : "240px"}
+          >
+            <Typography color="#ef99a4">--NEW ITEMS</Typography>
+            <Typography variant="h1">Summer Sale</Typography>
+            <Typography
+              fontWeight="bold"
+              color="#e66677"
+              sx={{ textDecoration: "underline" }}
+            >
+              Discover More
+            </Typography>
+          </Box>
         </Box>
       ))}
     </Carousel>

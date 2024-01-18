@@ -18,7 +18,12 @@ interface cartProps {
 
 export interface itemProps {
   id: number;
-  attributes: AttributesProps;
+  name: string;
+  shortDescription: string;
+  longDescription: string;
+  price: number;
+  category: string;
+  image: Buffer;
 }
 
 interface initialStateProps {

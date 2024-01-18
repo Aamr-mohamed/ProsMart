@@ -6,7 +6,16 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { addToCart } from "../state/state";
 import { useNavigate } from "react-router-dom";
 
-const Item = ({ item, width }) => {
+const Item = ({
+  name,
+  price,
+  shortDescription,
+  longDescription,
+  id,
+  category,
+  image,
+}) => {
+  console.log(name);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
@@ -14,30 +23,20 @@ const Item = ({ item, width }) => {
   //   const {
   // palette: { neutral },
   //   } = useTheme();
-  const { category, price, name, image } = item.attributes;
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image;
 
   return (
-    <Box width={width}>
+    <Box>
       <Box
         position="relative"
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
       >
         <img
-          onClick={() => navigate(`/item/${item.id}`)}
-          src={`http://localhost:1337${url}`}
+          onClick={() => navigate(`/item/${id}`)}
+          src={`data:image/png;base64,${image}`}
           width="300px"
           height="400px"
-          alt={item.name}
+          alt={name}
           style={{ cursor: "pointer" }}
         />
         <Box
@@ -70,7 +69,7 @@ const Item = ({ item, width }) => {
             </Box>
 
             <Button
-              onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
+              // onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
               sx={{ backgroundColor: "#666666", color: "white" }}
             >
               Add to Cart

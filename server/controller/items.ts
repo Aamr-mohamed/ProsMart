@@ -18,27 +18,24 @@ export async function getAllItems(req: Request, res: Response) {
     pool.getConnection((err, connection) => {
       if (err) throw err;
 
-      connection.query(
-        "SELECT name,category,price,shortDescription,longDescription,image FROM items",
-        (err, rows) => {
-          connection.release();
-          if (!err) {
-            const itemsWithBase64Images = rows.map((item) => ({
-              name: item.name,
-              price: item.price,
-              category: item.category,
-              shortDescription: item.shortDescription,
-              longDescription: item.longDescription,
-              image: Buffer.from(item.image).toString("base64"),
-            }));
-            console.log("Binary Image Data:", rows[0].image);
+      connection.query("SELECT * FROM items", (err, rows) => {
+        connection.release();
+        if (!err) {
+          const itemsWithBase64Images = rows.map((item) => ({
+            name: item.name,
+            price: item.price,
+            category: item.category,
+            shortDescription: item.shortDescription,
+            longDescription: item.longDescription,
+            image: Buffer.from(item.image).toString("base64"),
+          }));
+          console.log("Binary Image Data:", rows[0].image);
 
-            res.send(itemsWithBase64Images);
-          } else {
-            console.log(err);
-          }
+          res.send(itemsWithBase64Images);
+        } else {
+          console.log(err);
         }
-      );
+      });
     });
   } catch (err) {
     console.error(err);
@@ -54,7 +51,7 @@ export async function getByCategory(req: Request, res: Response) {
       if (err) throw err;
 
       connection.query(
-        "SELECT name,category,price,shortDescription,longDescription,image FROM items WHERE category = ?",
+        "SELECT * FROM items WHERE category = ?",
         [category],
         (err, rows) => {
           connection.release();

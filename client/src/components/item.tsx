@@ -33,7 +33,7 @@ const Item = ({
       >
         <img
           onClick={() => navigate(`/item/${id}`)}
-          src={`data:image/png;base64,${image}`}
+          src={`http://localhost:8000/uploads/images/${image}`}
           width="300px"
           height="400px"
           alt={name}

@@ -13,6 +13,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
+import { Fetcher } from "../../utils/fetcher";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -56,17 +57,12 @@ const Form = () => {
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
+      console.log(values);
     }
     formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const savedUser = await savedUserResponse.json();
+    const savedUser = await Fetcher("/user/register", formData, "POST");
+
     onSubmitProps.resetForm();
     if (savedUser) {
       setPageType("login");
@@ -74,12 +70,8 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    const loggedIn = await loggedInResponse.json();
+    const loggedInResponse = await Fetcher("/login", values, "POST");
+
     onSubmitProps.resetForm();
 
     navigate("/home");

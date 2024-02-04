@@ -27,7 +27,8 @@ model User{
   role Role @default(USER)
   email String
   password String 
-  picture String? 
+  picture String? @default("")
+  picturePath String? 
 }
 
 

@@ -1,8 +1,10 @@
 import express, { Express, Request, Response, Application } from "express";
 import dotenve from "dotenv";
-import itemsRoutes from "./routes/items";
+import itemsRoutes from "./routes/items.route";
+import userRoutes from "./routes/user.route";
 import helmet from "helmet";
 import cors from "cors";
+import createUser from "./controller/user";
 
 const multer = require("multer");
 
@@ -19,7 +21,6 @@ app.use(
 );
 
 // Example using Express to serve images
-app.use("/uploads/images", express.static("uploads/images"));
 
 app.use((req, res, next) => {
   res.header(
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -45,26 +47,40 @@ app.listen(port, () => {
 });
 
 app.use("/getItems", itemsRoutes);
+app.use("/api", userRoutes);
 
 interface CustomRequest extends Request {
   file: any;
 }
+
+app.use("/uploads/images", express.static("uploads/images"));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/images");
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + "-" + uniqueSuffix);
+    cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
+
+app.post("/api/user/register", upload.single("picture"), createUser);
 
 // Upload route
 app.post("/upload", upload.single("image"), (req: Request, res: Response) => {
   // Save file path in the database
   const imagePath = (req as CustomRequest).file.path;
   // Save 'imagePath' in the database for the corresponding item
+});
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
 });

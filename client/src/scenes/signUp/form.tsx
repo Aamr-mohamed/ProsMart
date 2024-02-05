@@ -70,7 +70,11 @@ const Form = () => {
         setPageType("login");
       }
     } catch (error: any) {
-      customToast("error", error.message);
+      if (error.message.includes("409")) {
+        customToast("error", "User already exists");
+      } else {
+        customToast("error", error.message);
+      }
     }
   };
 

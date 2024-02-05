@@ -15,6 +15,8 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 import { Fetcher } from "../../utils/fetcher";
 import { LoginValues, RegisterValues } from "./types";
+import { customToast } from "../../utils/toasts";
+import { toast } from "react-toastify";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -50,31 +52,48 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  const validationSchema = isRegister ? registerSchema : loginSchema;
-
   const register = async (values, onSubmitProps) => {
-    // this allows us to send form info with image
-    const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-      console.log(values);
-    }
-    formData.append("picturePath", values.picture.name);
+    try {
+      // this allows us to send form info with image
+      const formData = new FormData();
+      for (let value in values) {
+        formData.append(value, values[value]);
+        console.log(values);
+      }
+      formData.append("picturePath", values.picture.name);
 
-    const savedUser = await Fetcher("/user/register", formData, "POST");
+      const savedUser = await Fetcher("/user/register", formData, "POST");
 
-    onSubmitProps.resetForm();
-    if (savedUser) {
-      setPageType("login");
+      onSubmitProps.resetForm();
+      if (savedUser) {
+        customToast("success", "SignedUp successfully");
+        setPageType("login");
+      }
+    } catch (error: any) {
+      customToast("error", error.message);
     }
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await Fetcher("/user/login", values, "POST");
+    try {
+      const loggedInResponse = await Fetcher("/user/login", values, "POST");
 
-    onSubmitProps.resetForm();
+      onSubmitProps.resetForm();
 
-    navigate("/");
+      toast.success("logged in successfully", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        onClose: () => navigate("/"),
+      });
+    } catch (error: any) {
+      customToast("error", error.message);
+    }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {

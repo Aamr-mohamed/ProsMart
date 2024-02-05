@@ -8,6 +8,8 @@ import { theme } from "./theme";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./state/state";
+import { Slide, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const store = configureStore({
   reducer: { cart: cartReducer },
@@ -21,6 +23,7 @@ root.render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <ToastContainer transition={Slide} />
         <App />
       </ThemeProvider>
     </Provider>

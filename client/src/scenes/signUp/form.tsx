@@ -92,7 +92,13 @@ const Form = () => {
         onClose: () => navigate("/"),
       });
     } catch (error: any) {
-      customToast("error", error.message);
+      if (error.message.includes("400")) {
+        customToast("error", "Wrong credentials");
+      } else if (error.message.includes("404")) {
+        customToast("error", "User not found");
+      } else {
+        customToast("error", error.message);
+      }
     }
   };
 

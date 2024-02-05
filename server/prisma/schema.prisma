@@ -25,7 +25,7 @@ model User{
   firstName String
   lastName String
   role Role @default(USER)
-  email String
+  email String @unique
   password String 
   picture String? @default("")
   picturePath String? 

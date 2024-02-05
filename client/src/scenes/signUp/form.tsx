@@ -8,12 +8,13 @@ import {
   useTheme,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { Formik } from "formik";
+import { Formik, FormikErrors, FormikTouched } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 import { Fetcher } from "../../utils/fetcher";
+import { LoginValues, RegisterValues } from "./types";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -28,20 +29,17 @@ const loginSchema = yup.object().shape({
   password: yup.string().required("required"),
 });
 
-const initialValuesRegister = {
+const initialValuesRegister: RegisterValues = {
   firstName: "",
   lastName: "",
   email: "",
   password: "",
-  picture: "",
+  picture: "" as string | File,
 };
 
-const initialValuesLogin = {
+const initialValuesLogin: LoginValues = {
   email: "",
   password: "",
-  firstName: "",
-  lastName: "",
-  picture: "" as string | File,
 };
 
 const Form = () => {
@@ -51,6 +49,8 @@ const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
+
+  const validationSchema = isRegister ? registerSchema : loginSchema;
 
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
@@ -70,11 +70,11 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await Fetcher("/login", values, "POST");
+    const loggedInResponse = await Fetcher("/user/login", values, "POST");
 
     onSubmitProps.resetForm();
 
-    navigate("/home");
+    navigate("/");
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
@@ -113,22 +113,36 @@ const Form = () => {
                   label="First Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
+                  value={(values as RegisterValues).firstName}
                   name="firstName"
                   error={
-                    Boolean(touched.firstName) && Boolean(errors.firstName)
+                    Boolean(
+                      (touched as FormikTouched<RegisterValues>).firstName
+                    ) &&
+                    Boolean((errors as FormikErrors<RegisterValues>).firstName)
                   }
-                  helperText={touched.firstName && errors.firstName}
+                  helperText={
+                    (touched as FormikTouched<RegisterValues>).firstName &&
+                    (errors as FormikErrors<RegisterValues>).firstName
+                  }
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
                   label="Last Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.lastName}
+                  value={(values as RegisterValues).lastName}
                   name="lastName"
-                  error={Boolean(touched.lastName) && Boolean(errors.lastName)}
-                  helperText={touched.lastName && errors.lastName}
+                  error={
+                    Boolean(
+                      (touched as FormikTouched<RegisterValues>).lastName
+                    ) &&
+                    Boolean((errors as FormikErrors<RegisterValues>).lastName)
+                  }
+                  helperText={
+                    (touched as FormikTouched<RegisterValues>).lastName &&
+                    (errors as FormikErrors<RegisterValues>).lastName
+                  }
                   sx={{ gridColumn: "span 2" }}
                 />
 
@@ -153,12 +167,18 @@ const Form = () => {
                         sx={{ "&:hover": { cursor: "pointer" } }}
                       >
                         <input {...getInputProps()} />
-                        {!values.picture ||
-                        typeof values.picture === "string" ? (
+                        {!(values as RegisterValues).picture ||
+                        typeof (values as RegisterValues).picture ===
+                          "string" ? (
                           <p>Add Picture Here</p>
                         ) : (
                           <FlexBetween>
-                            <Typography>{values.picture.name}</Typography>
+                            <Typography>
+                              {
+                                ((values as RegisterValues).picture as File)
+                                  .name
+                              }
+                            </Typography>
                             <EditOutlinedIcon />
                           </FlexBetween>
                         )}

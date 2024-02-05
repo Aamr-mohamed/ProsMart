@@ -4,7 +4,7 @@ import itemsRoutes from "./routes/items.route";
 import userRoutes from "./routes/user.route";
 import helmet from "helmet";
 import cors from "cors";
-import createUser from "./controller/user";
+import { createUser, loginUser } from "./controller/user";
 
 const multer = require("multer");
 

@@ -46,7 +46,7 @@ app.listen(port, () => {
   console.log(`server is fire at http://localhost:${port}`);
 });
 
-app.use("/getItems", itemsRoutes);
+app.use("/item", itemsRoutes);
 app.use("/api", userRoutes);
 
 interface CustomRequest extends Request {
